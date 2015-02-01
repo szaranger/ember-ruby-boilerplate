@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>M2 Machines</title>
+  <link rel="stylesheet" href="css/bootstrap.css">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <!-- global template -->
+  <script type="text/x-handlebars" data-template-name="application">
+    <div class="container">
+      <h1>Vehicles</h1>
+      {{outlet}}
+      <hr>
+      <div class="row">
+        <p class="pull-right">
+          {{#link-to 'vehicles.new'}}New Vehicle{{/link-to}}
+        </p>
+      </div>
+    <div>
+  </script>
+
+  <script type="text/x-handlebars" data-template-name="index">
+    <ol class="breadcrumb">
+      <li class="active">Vehicles</li>
+    </ol>
+
+    <div class="row">
+      <div class="col-sm-8">
+        {{render 'vehicles' vehicles}}
+      </div>
+      <div class="col-sm-4">
+        {{render 'products' products}}
+      </div>
+    </div>
+  </script>
+
+  <script type="text/x-handlebars" data-template-name="vehicle">
+    <ol class="breadcrumb">
+      <li>{{#link-to 'index'}}Vehicles{{/link-to}}</a>
+      <li class="active">{{make.name}} {{model_name}}</a>
+    </ol>
+    
+    {{vehicle-description vehicle=this tag='div' class='row'}}
+  </script>
+
+  <script type="text/x-handlebars" data-template-name="vehicles">
+    {{#each}}
+      {{vehicle-short-description vehicle=this tag='li' class='row list-unstyled'}}
+    {{else}}
+      <li>There are no vehicles</li>
+    {{/each}}
+  </script>
+
+  <script type="text/x-handlebars" data-template-name="vehicles/new">
+    <ol class="breadcrumb">
+      <li>{{#link-to 'index'}}Products{{/link-to}}</a>
+      <li class="active">New</a>
+    </ol>
+    <div class="row">
+      <form class="form-horizontal" role="form">
+        <div class="form-group">
+          <label for="vehicle_model_name" class="col-sm-2 control-label">Model Name</label>
+          <div class="col-sm-9">
+            {{input class='form-control' id='vehicle_model_name' placeholder='Model Name' valueBinding='model.model_name'}}
+          </div>
+          <label for="vehicle_m2_id" class="col-sm-2 control-label">Model</label>
+          <div class="col-sm-9">
+            {{input class='form-control' id='vehicle_m2_id' placeholder='M2 ID' valueBinding='model.m2_id'}}
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="col-sm-offset-2 col-sm-10">
+            <button type="submit" class="btn btn-default" {{action 'createVehicle'}}>Save Vehicle</button>
+          </div>
+        </div>
+      </form>
+    </div>
+
+    {{vehicle-details vehicle=model}}
+  </script>
+
+  <script type="text/x-handlebars" data-template-name="product">
+    <ol class="breadcrumb">
+      <li>{{#link-to 'index'}}Products{{/link-to}}</a>
+      <li class="active">{{product.name}}</a>
+    </ol>
+    
+    {{render 'vehicles' vehicles}}
+  </script>
+
+  <script type="text/x-handlebars" data-template-name="products">
+    <h2>Products</h2>
+    <ul class="list-unstyled">
+      {{#each}}
+          <li>{{#link-to 'product' this class='label label-primary'}}{{name}}{{/link-to}}</li>
+        {{/each}}
+    </ul>
+  </script>
+
+  <script type="text/x-handlebars" data-template-name="components/vehicle-short-description">
+    <div class="col-sm-9">
+      <div class="col-sm-3">
+        <a {{bind-attr src='vehicle.image'}} target='_blank'>
+          <img {{bind-attr src='vehicle.image'}}  width="100"/>
+        </a>
+      </div>
+      <div class="col-sm-5">
+        <p>
+          {{#link-to 'vehicle' vehicle}}
+            {{vehicle.make.name}} {{vehicle.model_name}} {{vehicle.year}}
+          {{/link-to}}
+        </p>
+        <span>{{#link-to 'product' vehicle.product class='label label-primary'}}{{vehicle.product.name}}{{/link-to}}</span>
+      </div>
+    </div>
+  </script>
+  
+  <script type="text/x-handlebars" data-template-name="components/vehicle-description">
+    <div class="col-sm-3">
+      <a {{bind-attr src='vehicle.image'}} target='_blank'>
+        <img {{bind-attr src='vehicle.image'}}  width="250"/>
+      </a>
+      <p>
+        {{#link-to 'vehicle' vehicle}}
+          {{vehicle.make.name}} {{vehicle.model_name}} {{vehicle.year}}
+        {{/link-to}}
+      </p>
+      <span class="label label-primary">{{vehicle.product.name}}</span>
+    </div>
+  </script>
+ 
+  <script src="js/libs/jquery-1.10.2.js"></script>
+  <script src="js/libs/handlebars-v2.0.0.js"></script>
+  <script src="js/libs/ember-1.9.1.js"></script>
+  <script src="js/libs/ember-data.js"></script>
+  <script src="js/app.js"></script>
+  <!-- to activate the test runner, add the "?test" query string parameter -->
+  <script src="tests/runner.js"></script>
+</body>
+</html>
