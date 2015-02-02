@@ -15,7 +15,7 @@
       <hr>
       <div class="row">
         <p class="pull-right">
-          {{#link-to 'vehicles.new'}}New Vehicle{{/link-to}}
+          {{#link-to 'vehicle.new'}}New Vehicle{{/link-to}}
         </p>
       </div>
     <div>
@@ -36,7 +36,7 @@
     </div>
   </script>
 
-  <script type="text/x-handlebars" data-template-name="vehicle">
+  <script type="text/x-handlebars" data-template-name="vehicle/index">
     <ol class="breadcrumb">
       <li>{{#link-to 'index'}}Vehicles{{/link-to}}</a>
       <li class="active">{{make.name}} {{model_name}}</a>
@@ -45,15 +45,7 @@
     {{vehicle-description vehicle=this tag='div' class='row'}}
   </script>
 
-  <script type="text/x-handlebars" data-template-name="vehicles">
-    {{#each}}
-      {{vehicle-short-description vehicle=this tag='li' class='row list-unstyled'}}
-    {{else}}
-      <li>There are no vehicles</li>
-    {{/each}}
-  </script>
-
-  <script type="text/x-handlebars" data-template-name="vehicles/new">
+  <script type="text/x-handlebars" data-template-name="vehicle/new">
     <ol class="breadcrumb">
       <li>{{#link-to 'index'}}Products{{/link-to}}</a>
       <li class="active">New</a>
@@ -78,7 +70,15 @@
       </form>
     </div>
 
-    {{vehicle-details vehicle=model}}
+    {{vehicle-description vehicle=model}}
+  </script>
+
+  <script type="text/x-handlebars" data-template-name="vehicles">
+    {{#each}}
+      {{vehicle-short-description vehicle=this tag='li' class='row list-unstyled'}}
+    {{else}}
+      <li>There are no vehicles</li>
+    {{/each}}
   </script>
 
   <script type="text/x-handlebars" data-template-name="product">

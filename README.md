@@ -1,3 +1,8 @@
+Running
+=======
+$ gem install serve
+$ serve
+
 starter-kit
 ===========
 

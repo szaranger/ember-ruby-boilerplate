@@ -1,13 +1,12 @@
 App = Ember.Application.create();
 
 App.Router.map(function() {
-  this.resource('vehicle', { path: '/vehicles/:vehicle_id' });
-  this.resource('make', { path: '/makes/:make_id' });
-  this.resource('product', { path: '/products/:make_id' });
-  this.resource('vehicles', function() {
-  	//this.route('index', { path: '/vehicles/:vehicle_id' });
-  	this.route('new');
-  });
+	this.resource('vehicle', { path: '/vehicles/' }, function() {
+  		this.route('index', { path: '/:vehicle_id' });
+  		this.route('new', { path: '/new'});
+  	});
+  	this.resource('make', { path: '/makes/:make_id' });
+  	this.resource('product', { path: '/products/:product_id' });
 });
 
 App.IndexRoute = Ember.Route.extend({
@@ -25,16 +24,17 @@ App.IndexRoute = Ember.Route.extend({
 	}
 });
 
-App.VehicleRoute = Ember.Route.extend({
+App.VehicleIndexRoute = Ember.Route.extend({
 	model: function(params) {
+		console.log('VehicleIndexRoute'+  params.vehicle_id);
 		return this.store.find('vehicle', params.vehicle_id);
 	}
 });
 
-App.VehiclesNewRoute = Ember.Route.extend({
+App.VehicleNewRoute = Ember.Route.extend({
 	model: function() {
 		return Ember.RSVP.hash({
-	      vehicles: this.store.createRecord('vehicle'),
+	      vehicle: this.store.createRecord('vehicle'),
 	      products: this.store.findAll('product'),
 	      makes: this.store.findAll('make')
 	    });
@@ -59,7 +59,7 @@ App.VehiclesController = Ember.ArrayController.extend({
 	sortProperties: ['year']
 });
 
-App.VehiclesNewController = Ember.ArrayController.extend({
+App.VehiclesNewController = Ember.Controller.extend({
 	actions: {
 		createVehicle: function() {
 			var controller = this;
@@ -70,10 +70,6 @@ App.VehiclesNewController = Ember.ArrayController.extend({
 	}
 });
 
-App.VehiclesNewView = Ember.View.extend({
-	controller: 'VehiclesNewController'
-});
-
 App.MakesController = Ember.ArrayController.extend({
 	sortProperties: ['name']
 });
@@ -82,9 +78,7 @@ App.ProductsController = Ember.ArrayController.extend({
 	sortProperties: ['name']
 });
 
-App.ApplicationAdapter = DS.FixtureAdapter.extend({
-
-});
+App.ApplicationAdapter = DS.FixtureAdapter.extend({});
 
 App.Vehicle = DS.Model.extend({
 	make: DS.belongsTo('make'),
