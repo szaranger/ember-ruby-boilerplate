@@ -7,7 +7,7 @@
   <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-  
+  <!-- global template -->
   <script type="text/x-handlebars" data-template-name="application">
     <div class="container">
       <h1>Vehicles</h1>
@@ -15,7 +15,7 @@
       <hr>
       <div class="row">
         <p class="pull-right">
-          {{#link-to 'vehicle.new'}}+ New Vehicle{{/link-to}}
+          {{#link-to 'vehicle.new'}}New Vehicle{{/link-to}}
         </p>
       </div>
     <div>
@@ -41,46 +41,36 @@
       <li>{{#link-to 'index'}}Vehicles{{/link-to}}</a>
       <li class="active">{{make.name}} {{model_name}}</a>
     </ol>
-
+    
     {{vehicle-description vehicle=this tag='div' class='row'}}
   </script>
 
   <script type="text/x-handlebars" data-template-name="vehicle/new">
     <ol class="breadcrumb">
-      <li>{{#link-to 'index'}}Vehicles{{/link-to}}</a>
+      <li>{{#link-to 'index'}}Products{{/link-to}}</a>
       <li class="active">New</a>
     </ol>
     <div class="row">
       <form class="form-horizontal" role="form">
         <div class="form-group">
-          <label for="vehicle_make" class="col-sm-2 control-label">Make</label>
+          <label for="vehicle_model_name" class="col-sm-2 control-label">Model Name</label>
           <div class="col-sm-9">
-            {{view 'select' content=this.makes optionValuePath='content.id' optionLabelPath='content.name'  class='form-control'}}
+            {{input class='form-control' id='vehicle_model_name' placeholder='Model Name' valueBinding='model.model_name'}}
           </div>
-          <label for="vehicle_model" class="col-sm-2 control-label">Model</label>
-          <div class="col-sm-9">
-            {{input class='form-control' id='vehicle_model' placeholder='Model' valueBinding='model.model_name'}}
-          </div>
-          <label for="vehicle_year" class="col-sm-2 control-label">Year</label>
-          <div class="col-sm-9">
-            {{input class='form-control' id='vehicle_year' placeholder='Year' valueBinding='model.model_year'}}
-          </div>
-          <label for="vehicle_m2_id" class="col-sm-2 control-label">M2 ID</label>
+          <label for="vehicle_m2_id" class="col-sm-2 control-label">Model</label>
           <div class="col-sm-9">
             {{input class='form-control' id='vehicle_m2_id' placeholder='M2 ID' valueBinding='model.m2_id'}}
-          </div>
-          <label for="vehicle_product" class="col-sm-2 control-label">Product</label>
-          <div class="col-sm-9">
-            {{view 'select' content=this.products optionValuePath='content.id' optionLabelPath='content.name'  class='form-control'}}
           </div>
         </div>
         <div class="form-group">
           <div class="col-sm-offset-2 col-sm-10">
-            <button type="submit" class="btn btn-success" {{action 'createVehicle'}}>Save Vehicle</button>
+            <button type="submit" class="btn btn-default" {{action 'createVehicle'}}>Save Vehicle</button>
           </div>
         </div>
       </form>
     </div>
+
+    {{vehicle-description vehicle=model}}
   </script>
 
   <script type="text/x-handlebars" data-template-name="vehicles">
@@ -100,12 +90,12 @@
     {{render 'vehicles' vehicles}}
   </script>
 
-   <script type="text/x-handlebars" data-template-name="products">
+  <script type="text/x-handlebars" data-template-name="products">
     <h2>Products</h2>
     <ul class="list-unstyled">
       {{#each}}
-        <li>{{#link-to 'product' this class='label label-primary'}}{{name}}{{/link-to}}</li>
-      {{/each}}
+          <li>{{#link-to 'product' this class='label label-primary'}}{{name}}{{/link-to}}</li>
+        {{/each}}
     </ul>
   </script>
 

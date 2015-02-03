@@ -1,6 +1,5 @@
 Running
 =======
-$ gem install compass
 $ gem install serve
 $ serve
 

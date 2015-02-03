@@ -1,7 +1,4 @@
-App = Ember.Application.create({
-	LOG_VIEW_LOOKUPS: true,
-	LOG_ACTIVE_GENERATION: true
-});
+App = Ember.Application.create();
 
 App.Router.map(function() {
 	this.resource('vehicle', { path: '/vehicles/' }, function() {
@@ -50,7 +47,7 @@ App.VehicleNewRoute = Ember.Route.extend({
 	actions: {
 		willTransition:  function(transition) {
 			if(this.currentModel.vehicle.get('isNew')) {
-				this.currentModel.vehicle.destroyRecord();
+				this.currentModel.book.destroyRecord();
 			}
 		}
 	}
