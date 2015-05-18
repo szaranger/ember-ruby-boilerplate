@@ -12,7 +12,7 @@ App.Router.map(function() {
   		this.route('index', { path: '/:vehicle_id' });
   		this.route('new', { path: '/new'});
   	});
-  	this.resource('make', { path: '/makes/:make_id' });
+  	this.resource('maker', { path: '/makers/:maker_id' });
   	this.resource('product', { path: '/products/:product_id' });
 });
 
@@ -20,13 +20,13 @@ App.IndexRoute = Ember.Route.extend({
 	model: function() {
 	  	return Ember.RSVP.hash({
 	  		vehicles: this.store.findAll('vehicle'), // GET /vehicles
-	  		makes: this.store.findAll('make'),
+	  		makers: this.store.findAll('maker'),
 	  		products: this.store.findAll('product')
 	  	});
   	},
 	setupController: function(controller, model) {
 		controller.set('vehicles', model.vehicles);
-		controller.set('makes', model.makes);
+		controller.set('makers', model.makers);
 		controller.set('products', model.products);
 	}
 });
@@ -43,13 +43,13 @@ App.VehicleNewRoute = Ember.Route.extend({
 		return Ember.RSVP.hash({
 	      vehicle: this.store.createRecord('vehicle'),
 	      products: this.store.findAll('product'),
-	      makes: this.store.findAll('make')
+	      makers: this.store.findAll('makers')
 	    });
 	},
 	setupController: function(controller, model) {
 	    controller.set('model', model.vehicle);
 	    controller.set('products', model.products);
-	    controller.set('makes', model.makes);
+	    controller.set('makers', model.makers);
 	},
 	actions: {
 		willTransition:  function(transition) {
@@ -77,7 +77,7 @@ App.VehiclesNewController = Ember.Controller.extend({
 	}
 });
 
-App.MakesController = Ember.ArrayController.extend({
+App.MakersController = Ember.ArrayController.extend({
 	sortProperties: ['name']
 });
 
@@ -86,7 +86,7 @@ App.ProductsController = Ember.ArrayController.extend({
 });
 
 App.Vehicle = DS.Model.extend({
-	make: DS.belongsTo('make'),
+	maker: DS.belongsTo('maker'),
 	model_name: DS.attr(),
 	year: DS.attr('number'),
 	product: DS.belongsTo('product'),
@@ -96,7 +96,7 @@ App.Vehicle = DS.Model.extend({
 	}.property('m2_id')
 });
 
-App.Make = DS.Model.extend({
+App.Maker = DS.Model.extend({
 	name: DS.attr(),
 	vehicles: DS.hasMany('vehicle')
 });

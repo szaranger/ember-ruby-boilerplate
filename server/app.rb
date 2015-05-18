@@ -5,7 +5,7 @@ require 'sinatra/activerecord'
 VEHICLES = [
 	{
 		id: 1,
-		make: 1,
+		maker: 1,
 		model_name: 'Crestliner',
 		year: 1951,
 		product: 1,
@@ -13,7 +13,7 @@ VEHICLES = [
 	},
 	{
 		id: 2,
-		make: 2,
+		maker: 2,
 		model_name: '98',
 		year: 1953,
 		product: 1,
@@ -21,7 +21,7 @@ VEHICLES = [
 	}
 ]
 
-MAKES = [
+MAKERS = [
     {
 		id: 1,
 		name: 'Ford',
@@ -59,8 +59,8 @@ get '/vehicles' do
     json vehicles: VEHICLES
 end
 
-get '/makes' do
-    json makes: MAKES
+get '/makers' do
+    json makers: MAKERS
 end
 
 get '/products' do

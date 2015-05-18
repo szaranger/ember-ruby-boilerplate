@@ -39,7 +39,7 @@
   <script type="text/x-handlebars" data-template-name="vehicle/index">
     <ol class="breadcrumb">
       <li>{{#link-to 'index'}}Vehicles{{/link-to}}</li>
-      <li class="active">{{make.name}} {{model_name}}</li>
+      <li class="active">{{maker.name}} {{model_name}}</li>
     </ol>
 
     {{vehicle-description vehicle=this tag='div' class='row'}}
@@ -53,9 +53,9 @@
     <div class="row">
       <form class="form-horizontal" role="form">
         <div class="form-group">
-          <label for="vehicle_make" class="col-sm-2 control-label">Make</label>
+          <label for="vehicle_maker" class="col-sm-2 control-label">Maker</label>
           <div class="col-sm-9">
-            {{view 'select' content=this.makes optionValuePath='content.id' optionLabelPath='content.name'  class='form-control'}}
+            {{view 'select' content=this.makers optionValuePath='content.id' optionLabelPath='content.name'  class='form-control'}}
           </div>
           <label for="vehicle_model" class="col-sm-2 control-label">Model</label>
           <div class="col-sm-9">
@@ -119,7 +119,7 @@
       <div class="col-sm-5">
         <p>
           {{#link-to 'vehicle' vehicle}}
-            {{vehicle.make.name}} {{vehicle.model_name}} {{vehicle.year}}
+            {{vehicle.maker.name}} {{vehicle.model_name}} {{vehicle.year}}
           {{/link-to}}
         </p>
         <span>{{#link-to 'product' vehicle.product class='label label-primary'}}{{vehicle.product.name}}{{/link-to}}</span>
@@ -134,7 +134,7 @@
       </a>
       <p>
         {{#link-to 'vehicle' vehicle}}
-          {{vehicle.make.name}} {{vehicle.model_name}} {{vehicle.year}}
+          {{vehicle.maker.name}} {{vehicle.model_name}} {{vehicle.year}}
         {{/link-to}}
       </p>
       <span class="label label-primary">{{vehicle.product.name}}</span>
