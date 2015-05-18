@@ -1,8 +1,18 @@
 Running
 =======
+
+Client
+------
+
 $ gem install compass
 $ gem install serve
 $ serve
+
+Server
+------
+
+$ gem install sinatra sinatra-contrib
+$ ruby server/app.rb
 
 starter-kit
 ===========
