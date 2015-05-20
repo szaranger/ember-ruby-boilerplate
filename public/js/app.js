@@ -24,6 +24,11 @@ App.IndexRoute = Ember.Route.extend({
 	  		products: this.store.findAll('product')
 	  	});
   	},
+	/*
+	 * To tell one of Ember.ObjectController or Ember.ArrayController
+	 * which model to present, set its model property in the
+	 * route handler's setupController hook.
+	 */
 	setupController: function(controller, model) {
 		controller.set('vehicles', model.vehicles);
 		controller.set('makers', model.makers);
@@ -57,6 +62,12 @@ App.VehicleNewRoute = Ember.Route.extend({
 				this.currentModel.vehicle.destroyRecord();
 			}
 		}
+	}
+});
+
+App.MakersRoute = Ember.Route.extend({
+	model: function() {
+		return this.store.findAll('maker');
 	}
 });
 
@@ -106,3 +117,10 @@ App.Product = DS.Model.extend({
 	vehicles: DS.hasMany('vehicle', {async: true})
 });
 
+/*App.VehicleView = Ember.View.create({
+	//templateName: 'vehicles'
+	personName: 'Dr. Tobias Fünke',
+	template: Ember.Handlebars.compile('Hello {{personName}}')
+});
+
+App.VehicleView.append();*/

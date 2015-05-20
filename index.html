@@ -10,7 +10,7 @@
   
   <script type="text/x-handlebars" data-template-name="application">
     <div class="container">
-      <h1>Vehicles</h1>
+      <h1>M2Machines</h1>
       {{outlet}}
       <hr>
       <div class="row">
@@ -18,7 +18,7 @@
           {{#link-to 'vehicle.new'}}+ New Vehicle{{/link-to}}
         </p>
       </div>
-    <div>
+    </div>
   </script>
 
   <script type="text/x-handlebars" data-template-name="index">
@@ -32,6 +32,7 @@
       </div>
       <div class="col-sm-4">
         {{render 'products' products}}
+        {{render 'makers' makers}}
       </div>
     </div>
   </script>
@@ -93,18 +94,41 @@
 
   <script type="text/x-handlebars" data-template-name="product">
     <ol class="breadcrumb">
-      <li>{{#link-to 'index'}}Products{{/link-to}}</li>
-      <li class="active">{{product.name}}</li>
+      <li>{{#link-to 'index'}}Vehicles{{/link-to}}</li>
+      <li>Products</li>
+      <li class="active">{{name}}</li>
     </ol>
     
     {{render 'vehicles' vehicles}}
   </script>
 
-   <script type="text/x-handlebars" data-template-name="products">
+  <script type="text/x-handlebars" data-template-name="products">
     <h2>Products</h2>
     <ul class="list-unstyled">
       {{#each}}
         <li>{{#link-to 'product' this class='label label-primary'}}{{name}}{{/link-to}}</li>
+      {{/each}}
+    </ul>
+  </script>
+
+  <script type="text/x-handlebars" data-template-name="maker">
+    <ol class="breadcrumb">
+      <li>{{#link-to 'index'}}Vehicles{{/link-to}}</li>
+      <li>Makers</li>
+      <li class="active">{{name}}</li>
+    </ol>
+    <div class="row">
+      <div class="col-sm-12">
+        {{render 'vehicles' vehicles}}
+      </div>
+    </div>
+  </script>
+
+  <script type="text/x-handlebars" data-template-name="makers">
+    <h2>Makers</h2>
+    <ul class="list-unstyled">
+      {{#each}}
+        <li>{{#link-to 'maker' this class='label label-primary'}}{{name}}{{/link-to}}</li>
       {{/each}}
     </ul>
   </script>
@@ -145,6 +169,7 @@
   <script src="public/js/libs/handlebars-v2.0.0.js"></script>
   <script src="public/js/libs/ember-1.9.1.js"></script>
   <script src="public/js/libs/ember-data.js"></script>
+
   <script src="public/js/app.js"></script>
   <!-- to activate the test runner, add the "?test" query string parameter -->
   <script src="tests/runner.js"></script>
