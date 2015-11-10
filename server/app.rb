@@ -59,14 +59,22 @@ get '/vehicles' do
     json vehicles: VEHICLES
 end
 
+get '/vehicles/:id' do
+    json vehicle: VEHICLES.find { | vehicle | vehicle[:id].to_i }
+end
+
 get '/makers' do
     json makers: MAKERS
+end
+
+get '/makers/:id' do
+    json maker: MAKERS.find { | maker | maker[:id].to_i }
 end
 
 get '/products' do
     json products: PRODUCTS
 end
 
-get '/vehicles/:id' do
-    json vehicles: VEHICLES.find { | friend | friend[:id].to_i }
+get '/products/:id' do
+    json product: VEHICLES.find { | product | product[:id].to_i }
 end

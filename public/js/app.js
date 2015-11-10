@@ -99,7 +99,6 @@ App.ProductsController = Ember.ArrayController.extend({
 App.Vehicle = DS.Model.extend({
 	maker: DS.belongsTo('maker'),
 	model_name: DS.attr(),
-	year: DS.attr('number'),
 	product: DS.belongsTo('product'),
 	m2_id: DS.attr(),
 	image: function() {
@@ -117,10 +116,3 @@ App.Product = DS.Model.extend({
 	vehicles: DS.hasMany('vehicle', {async: true})
 });
 
-/*App.VehicleView = Ember.View.create({
-	//templateName: 'vehicles'
-	personName: 'Dr. Tobias Fünke',
-	template: Ember.Handlebars.compile('Hello {{personName}}')
-});
-
-App.VehicleView.append();*/
